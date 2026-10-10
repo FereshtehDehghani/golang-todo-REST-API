@@ -12,7 +12,8 @@ import (
 var DB *pgx.Conn
 func InitDB() {
 	url := "postgres://postgres:adminPassword@localhost:5434/todo-tasks?sslmode=disable"
-	DB, err := pgx.Connect(context.Background(), url)
+	var err error
+	DB, err = pgx.Connect(context.Background(), url)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)

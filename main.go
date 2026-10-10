@@ -6,19 +6,17 @@ import (
 
 	"github.com/FereshtehDehghani/golang-todo-REST-API/config"
 	"github.com/FereshtehDehghani/golang-todo-REST-API/db"
-	"github.com/gin-gonic/gin"
+	"github.com/FereshtehDehghani/golang-todo-REST-API/routes"
 )
 
 
 func main(){
- db.InitDB()
-	 handler :=gin.Default()
 
+	 handler :=routes.MuonteRoutes()
 
 	 config.Config.LoadConfig()
-
 	
-
+ db.InitDB()
 	server :=&http.Server{
 		Addr: config.Config.AppPort,
 		Handler: handler,

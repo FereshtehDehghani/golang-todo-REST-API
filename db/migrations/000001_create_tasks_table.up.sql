@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tasks(
+   id serial PRIMARY KEY,
+   title VARCHAR (255) UNIQUE NOT NULL,
+   description TEXT NOT NULL,
+   status VARCHAR (50) NOT NULL DEFAULT 'pending',
+   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
