@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"log"
 	"net/http"
 
@@ -10,14 +9,10 @@ import (
 )
 
 
-type PostTaskPayload struct{
-	Title string `json:"title" binding:"required"`
-	Description string `json:"description" binding:"required"`
-	Status string `json:"status" binding:"required"`
-}
+
 
 func SaveTask(c *gin.Context){
-	var payload PostTaskPayload
+	var payload db.PostTaskPayload
 
 
 
@@ -27,11 +22,7 @@ func SaveTask(c *gin.Context){
 		return
 	}
 
-	var id int
-
-	query :=`Insert into tasks (title,description,status) VALUES ($1,$2,$3) RETURNING id;`    
-	err := db.DB.QueryRow(context.Background(),query,payload.Title,payload.Description,payload.Status).Scan(&id)
-
+id,err := db.TaskRepository.SaveTaskQuery(payload)
 		if err != nil{
 		c.JSON(http.StatusInternalServerError,gin.H{"error":true,"msg":err.Error()})
          log.Printf(string(err.Error()))

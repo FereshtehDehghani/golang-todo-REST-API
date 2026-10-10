@@ -10,7 +10,7 @@ import (
 
 type envConfig struct{
 	AppPort string
-	DBPath string
+	DbPath string
 }
 
 func (e *envConfig) LoadConfig(){
@@ -22,7 +22,7 @@ func (e *envConfig) LoadConfig(){
 
 	
  e.AppPort =loadString("APP_PORT",":8080")
- e.DBPath=loadString("DB_PATH","1000")
+ e.DbPath=loadString("DB_PATH","1000")
 
 }
 
